@@ -17,7 +17,6 @@ def count_group_every_answers(answers):
                 to_remove.append(question)
         for q in to_remove:
             question_set.remove(q)
-    #print(str(question_set) + ' = ' + str(len(question_set)))
     return len(question_set)
 
 

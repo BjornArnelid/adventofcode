@@ -3,6 +3,8 @@ import unittest
 from day5 import get_ticket_row, get_ticket_column, get_ticket_id
 
 base_ticket = 'FBFBBFFRLR'
+
+
 class Day5Test(unittest.TestCase):
     def test_row_from_ticket(self):
         self.assertEqual(44, get_ticket_row(base_ticket))
