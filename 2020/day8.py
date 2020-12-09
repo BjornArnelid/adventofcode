@@ -47,7 +47,6 @@ class Program(object):
         raise Exception('No solution found!')
 
 
-
 if __name__ == '__main__':
     with open('day8.data') as data:
         program = Program(data.read().strip())
