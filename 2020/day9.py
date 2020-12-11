@@ -42,7 +42,7 @@ if __name__ == '__main__':
     with open('day9.data') as data:
         for line in data:
             numbers.append(int(line))
-            no_match = find_first_deviant(numbers, 25)
+        no_match = find_first_deviant(numbers, 25)
         print('First number not matching: ' + str(no_match))
         matching_list = find_matching_sequence(numbers, no_match)
         matching_list = sorted(matching_list)
