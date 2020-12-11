@@ -47,6 +47,6 @@ def count_valid_passports(passports, check_fields=False):
 
 
 if __name__ == '__main__':
-    with open('day4.data') as data:
+    with open('data/day4.data') as data:
         print(count_valid_passports(data.read(), True))
 

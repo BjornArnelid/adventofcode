@@ -24,7 +24,7 @@ def find_and_multiply_three(input_array):
 
 def get_from_file():
     numbers = []
-    with open('day1.data') as data:
+    with open('data/day1.data') as data:
         for line in data:
             numbers.append(int(line))
     return numbers

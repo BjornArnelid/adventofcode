@@ -34,7 +34,7 @@ def recursive_count_variations(current_value, counter, numbers):
 
 if __name__ == '__main__':
     numbers = []
-    with open('day10.data') as data:
+    with open('data/day10.data') as data:
         for line in data:
             numbers.append(int(line))
     one_steps, three_steps = count_steps(numbers)

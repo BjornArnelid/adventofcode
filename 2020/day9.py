@@ -39,7 +39,7 @@ def find_matching_sequence(number_list, expected_result):
 
 if __name__ == '__main__':
     numbers = []
-    with open('day9.data') as data:
+    with open('data/day9.data') as data:
         for line in data:
             numbers.append(int(line))
         no_match = find_first_deviant(numbers, 25)

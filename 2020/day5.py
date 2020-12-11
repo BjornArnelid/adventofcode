@@ -33,7 +33,7 @@ def get_ticket_id(ticket):
 
 
 if __name__ == '__main__':
-    with open('day5.data') as data:
+    with open('data/day5.data') as data:
         all_ids = []
         for line in data:
             all_ids.append(get_ticket_id(line.strip()))

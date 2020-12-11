@@ -48,7 +48,7 @@ class Program(object):
 
 
 if __name__ == '__main__':
-    with open('day8.data') as data:
+    with open('data/day8.data') as data:
         program = Program(data.read().strip())
         print('Number at recursion ' + str(program.execute_instructions()[1]))
         program.accumulator = 0

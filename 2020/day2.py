@@ -15,7 +15,7 @@ def letter_is_at_position(position, letter, word):
 
 
 if __name__ == '__main__':
-    with open('day2.data') as data:
+    with open('data/day2.data') as data:
         counter = 0
         for line in data:
             rule, password = line.split(': ')

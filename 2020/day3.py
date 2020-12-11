@@ -26,7 +26,7 @@ class Topography(object):
 
 
 if __name__ == '__main__':
-    with open('day3.data') as data:
+    with open('data/day3.data') as data:
         topography = Topography(list(data))
         first = topography.count_trees(1, 1)
         topography.reset()

@@ -29,7 +29,7 @@ def count_every_answers(answers):
 
 
 if __name__ == '__main__':
-    with open('day6.data') as data:
+    with open('data/day6.data') as data:
         read_answers = data.read()
         print(count_any_answers(read_answers))
         print(count_every_answers(read_answers))

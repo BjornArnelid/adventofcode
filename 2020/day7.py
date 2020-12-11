@@ -41,7 +41,7 @@ class ContentRule(object):
 
 
 if __name__ == '__main__':
-    with open('day7.data') as data:
+    with open('data/day7.data') as data:
         rules = LuggageRules(data.read().strip())
         print(len(rules.get_top_containers('shiny gold')))
         print(rules.count_required_bags('shiny gold'))
