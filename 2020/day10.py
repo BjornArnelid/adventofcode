@@ -15,18 +15,21 @@ def count_steps(numbers):
 
 def count_variations(numbers):
     sorted_numbers = sorted(numbers)
-    return recursive_count_variations(0, 0, sorted_numbers)
+    return recursive_count_variations(0, 0, sorted_numbers, {})
 
 
-def recursive_count_variations(current_value, counter, numbers):
+def recursive_count_variations(current_value, counter, numbers, solved_steps):
+    if solved_steps.get(counter) is not None:
+        return solved_steps.get(counter)
     possible_branches = 0
     if counter < len(numbers) and numbers[counter] - current_value <= 3:
-        possible_branches += recursive_count_variations(numbers[counter], counter+1, numbers)
+        possible_branches += recursive_count_variations(numbers[counter], counter+1, numbers, solved_steps)
 
         if counter + 1 < len(numbers) and numbers[counter+1] - current_value <= 3:
-            possible_branches += recursive_count_variations(numbers[counter+1], counter+2, numbers)
+            possible_branches += recursive_count_variations(numbers[counter+1], counter+2, numbers, solved_steps)
             if counter + 2 < len(numbers) and numbers[counter+2] - current_value == 3:
-                possible_branches += recursive_count_variations( numbers[counter+2], counter+3, numbers)
+                possible_branches += recursive_count_variations( numbers[counter+2], counter+3, numbers, solved_steps)
+        solved_steps[counter] = possible_branches
         return possible_branches
     else:
         return 1

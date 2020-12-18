@@ -25,7 +25,6 @@ class CubeGrid:
 
     def run_simulation(self, cycles):
         for lap in range(cycles):
-            print('running simulation no. {}'.format(lap))
             for w in range(self.w_range[0] - 1, self.w_range[1] + 2):
                 for z in range(self.z_range[0] - 1, self.z_range[1] + 2):
                     for y in range(self.y_range[0] - 1, self.y_range[1] + 2):
