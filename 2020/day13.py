@@ -1,6 +1,3 @@
-import multiprocessing
-
-
 def get_next_departure(depart_string, departures):
     valid_departures = parse_departures(departures)
     depart_time = int(depart_string)
@@ -29,26 +26,41 @@ def parse_departures(departures):
     return parsed_departures
 
 
-def find_ordered_departures(first_number, depart_input):
-    depart_times = parse_departures(depart_input)
-    largest_departure = max(depart_times)
-    largest_index = depart_times.index(largest_departure)
-    diff = first_number % largest_departure
-    departure = first_number - (diff + largest_index)
-    in_order = False
-    while not in_order:
-        departure += largest_departure
-        in_order = verify_order(depart_times, departure)
-    if departure > first_number*2:
-        return 0
-    return departure
+def chinese_remainder_find_order(time_table):
+    depart_map = departures_to_map(parse_departures(time_table))
+    combined_modulus = get_combined_modulus(depart_map)
+    accumulated_depart_time = 0
+    for position, modulus in depart_map.items():
+        accumulated_depart_time += calculate_depart_time(position, modulus, combined_modulus)
+    return accumulated_depart_time % combined_modulus
 
 
-def verify_order(depart_times, departure):
-    for i in range(len(depart_times)):
-        if depart_times[i] != 0 and (departure + i) % depart_times[i] != 0:
-            return False
-    return True
+def calculate_depart_time(position, modulus, combined_modulus):
+    working_modulus = combined_modulus / modulus
+    remainder = -position % modulus
+    inverse_mod = 1
+    while (working_modulus * inverse_mod) % modulus != remainder:
+        inverse_mod += 1
+    return working_modulus * inverse_mod
+
+
+def get_combined_modulus(depart_map):
+    combined_modulus = 1
+    for departure_time in depart_map.values():
+        combined_modulus *= departure_time
+    return combined_modulus
+
+
+def find_ordered_departures(depart_input):
+    return chinese_remainder_find_order(depart_input)
+
+
+def departures_to_map(departures):
+    departure_map = {}
+    for i in range(len(departures)):
+        if departures[i] != 0:
+            departure_map[i] = departures[i]
+    return departure_map
 
 
 if __name__ == '__main__':
@@ -60,14 +72,5 @@ if __name__ == '__main__':
     wait_time = best_time-int(departing_time)
     print('Buss {} leaves in {} which results in {}'.format(best_line, wait_time, best_line*wait_time))
 
-    tasks = []
-    pool = multiprocessing.Pool()
-    for i in range(1, 11):
-        tasks.append((100000000000000*i, buss_lines))
-    results = [pool.apply_async(find_ordered_departures, t) for t in tasks]
-
-    for answer in results:
-        if answer.get() != 0:
-            print('earliest matching timestamp: ' + str(answer))
-        else:
-            print('No result found')
+    results = chinese_remainder_find_order(buss_lines)
+    print('Earliest matching timestamp: ' + str(results))

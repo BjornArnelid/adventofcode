@@ -13,8 +13,11 @@ class Day13Test(unittest.TestCase):
         depart_time, line = get_next_departure('939', depart_times)
         self.assertEqual((5, 59), (depart_time - 939, line))
 
+    def test_find_2_first_in_order(self):
+        self.assertEqual(77, find_ordered_departures(['7', '13']))
+
     def test_find_departures_order(self):
-        self.assertEqual(1068781, find_ordered_departures(1000000, depart_times))
+        self.assertEqual(1068781, find_ordered_departures(depart_times))
 
 
 if __name__ == '__main__':
