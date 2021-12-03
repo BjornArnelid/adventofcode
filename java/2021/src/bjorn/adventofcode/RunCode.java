@@ -17,6 +17,10 @@ public class RunCode {
             try {
                 if (day.equals("1")) {
                     day1();
+                } else if (day.equals("2")) {
+                    day2();
+                } else if (day.equals("3")) {
+                    day3();
                 } else {
                     System.out.println("You selected day " + day);
                 }
@@ -41,6 +45,36 @@ public class RunCode {
         System.out.println("Starting part two...");
         List<Integer> slidingDepths = sonar.toSlidingList(depths);
         System.out.println("Answer part two: " + sonar.countIncreases(slidingDepths));
+    }
+
+    private static void day2() throws IOException {
+        System.out.println("Starting part one...");
+        Submarine submarine = new Submarine();
+        submarine.move(readInput("data/day2.data"));
+
+        System.out.println("Answer part one: " + submarine.getDepth() * submarine.getDistance());
+
+        System.out.println("Starting part two...");
+        submarine = new Submarine();
+        submarine.aim(readInput("data/day2.data"));
+
+        System.out.println("Answer part two: " + submarine.getDepth() * submarine.getDistance());
+    }
+
+    private static void day3() throws IOException {
+        System.out.println("Starting part one...");
+        Diagnostics diagnostics = new Diagnostics();
+        int gamma = diagnostics.getGamma(readInput("data/day3.data"));
+        int epsilon = diagnostics.getEpsilon(readInput("data/day3.data"));
+
+        System.out.println("Answer part one: " + gamma * epsilon);
+
+        System.out.println("Starting part two...");
+        int oxygenGenerator = diagnostics.getOxygenGenerator(readInput("data/day3.data"));
+        int co2Scrubber = diagnostics.getCO2Scrubber(readInput("data/day3.data"));
+
+        System.out.println("Answer part two: " + oxygenGenerator * co2Scrubber);
+
     }
 
     private static Stream<String> readInput(String path) throws IOException {
