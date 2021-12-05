@@ -1,4 +1,4 @@
-package bjorn.adventofcode;
+package bjorn.adventofcode.day4;
 
 import java.util.ArrayList;
 import java.util.List;

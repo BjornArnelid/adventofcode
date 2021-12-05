@@ -1,4 +1,4 @@
-package bjorn.adventofcode;
+package bjorn.adventofcode.day2;
 
 import java.util.stream.Stream;
 

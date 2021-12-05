@@ -1,4 +1,4 @@
-import bjorn.adventofcode.Sonar;
+import bjorn.adventofcode.day1.Sonar;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

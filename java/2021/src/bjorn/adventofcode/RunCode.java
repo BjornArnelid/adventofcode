@@ -1,5 +1,10 @@
 package bjorn.adventofcode;
 
+import bjorn.adventofcode.day1.Sonar;
+import bjorn.adventofcode.day2.Submarine;
+import bjorn.adventofcode.day3.Diagnostics;
+import bjorn.adventofcode.day4.Bingo;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;

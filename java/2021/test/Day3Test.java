@@ -1,4 +1,4 @@
-import bjorn.adventofcode.Diagnostics;
+import bjorn.adventofcode.day3.Diagnostics;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

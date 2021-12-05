@@ -1,4 +1,4 @@
-package bjorn.adventofcode;
+package bjorn.adventofcode.day4;
 
 public class Board {
     private final String[] tiles;

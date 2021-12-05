@@ -1,5 +1,5 @@
-import bjorn.adventofcode.Bingo;
-import bjorn.adventofcode.Board;
+import bjorn.adventofcode.day4.Bingo;
+import bjorn.adventofcode.day4.Board;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

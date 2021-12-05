@@ -1,4 +1,4 @@
-import bjorn.adventofcode.Submarine;
+import bjorn.adventofcode.day2.Submarine;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Stream;
