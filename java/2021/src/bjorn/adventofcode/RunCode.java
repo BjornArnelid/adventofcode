@@ -6,13 +6,17 @@ import bjorn.adventofcode.day3.Diagnostics;
 import bjorn.adventofcode.day4.Bingo;
 import bjorn.adventofcode.day5.Line;
 import bjorn.adventofcode.day5.Navigator;
+import bjorn.adventofcode.day6.FishSimulator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -33,6 +37,8 @@ public class RunCode {
                     day4();
                 } else if (day.equals("5")) {
                     day5();
+                } else if (day.equals("6")) {
+                    day6();
                 } else {
                     System.out.println("You selected day " + day);
                 }
@@ -150,6 +156,24 @@ public class RunCode {
         String[] first = lineStrings[0].split(",");
         String[] second = lineStrings[1].split(",");
         return new Line(Integer.parseInt(first[0]), Integer.parseInt(first[1]), Integer.parseInt(second[0]), Integer.parseInt(second[1]));
+    }
+
+    private static void day6() throws IOException {
+        System.out.println("Starting day 5 part one...");
+
+        List<Integer> initialFishes = Arrays.stream(readInput("data/day6.data")
+                .findFirst().get().split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+        FishSimulator simulator = new FishSimulator(initialFishes);
+        simulator.step(80);
+        System.out.println("Answer part one: " + simulator.getNumberOfFishes());
+
+        System.out.println("Starting part two...");
+        simulator.step(256-80);
+        NumberFormat myformatter = new DecimalFormat("########");
+
+        String result = myformatter.format(simulator.getNumberOfFishes());
+        System.out.println("Answer part two: " + result);
+
     }
 
     private static Stream<String> readInput(String path) throws IOException {
