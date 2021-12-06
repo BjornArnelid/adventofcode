@@ -46,8 +46,6 @@ public class Day5Test {
     }
 
     @Test
-    @Disabled
-    // Day 5 Failed
     public void testMultipleOverlap() {
         Navigator navigator = new Navigator();
         navigator.addLine(new Line(0,9,5,9));

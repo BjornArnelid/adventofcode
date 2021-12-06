@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Navigator {
-    private List<Line> vents = new ArrayList<>();
-    private int overlaps = 0;
+    private final List<Line> vents = new ArrayList<>();
+    private final ArrayList<Position> overlapList = new ArrayList<>();
 
     public void addLine(Line line) {
         for(Line otherLine : vents) {
             if(!otherLine.isVertical()){
                 if(line.horizontalMatch(otherLine) || line.verticalMatch(otherLine)) {
-                    overlaps += line.calculateOverlap(otherLine);
+                    for(Position overlap : line.calculateOverlap(otherLine)) {
+                        addOverlaps(overlap);
+                    }
+
                 }
             }
         }
@@ -19,8 +22,17 @@ public class Navigator {
         vents.add(line);
     }
 
+    private void addOverlaps(Position overlap) {
+        for(Position old : overlapList) {
+            if(overlap.equals(old)) {
+                return;
+            }
+        }
+        overlapList.add(overlap);
+    }
+
 
     public int getNumberOfOverlapa() {
-        return overlaps;
+        return overlapList.size();
     }
 }
