@@ -4,6 +4,8 @@ import bjorn.adventofcode.day1.Sonar;
 import bjorn.adventofcode.day2.Submarine;
 import bjorn.adventofcode.day3.Diagnostics;
 import bjorn.adventofcode.day4.Bingo;
+import bjorn.adventofcode.day5.Line;
+import bjorn.adventofcode.day5.Navigator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,7 +31,8 @@ public class RunCode {
                     day3();
                 } else if (day.equals("4")) {
                     day4();
-
+                } else if (day.equals("5")) {
+                    day5();
                 } else {
                     System.out.println("You selected day " + day);
                 }
@@ -41,8 +44,6 @@ public class RunCode {
             System.out.println("Select a day!");
         }
     }
-
-
 
     private static void day1() throws IOException {
         System.out.println("Starting part one...");
@@ -127,13 +128,28 @@ public class RunCode {
         StringBuilder board = new StringBuilder();
         for(String row : input) {
             if(!row.isEmpty()) {
-                board.append(row + "\n");
+                board.append(row).append("\n");
             } else {
                 boards.add(board.toString());
                 board = new StringBuilder();
             }
         }
         return boards;
+    }
+
+    private static void day5() throws IOException {
+        System.out.println("Starting day 5 part one...");
+        Navigator navigator = new Navigator();
+        readInput("data/day5.data").forEach(s -> navigator.addLine(createLine(s)));
+
+        System.out.println("Answer part one: " + navigator.getNumberOfOverlapa());
+    }
+
+    private static Line createLine(String input) {
+        String[] lineStrings = input.split(" -> ");
+        String[] first = lineStrings[0].split(",");
+        String[] second = lineStrings[1].split(",");
+        return new Line(Integer.parseInt(first[0]), Integer.parseInt(first[1]), Integer.parseInt(second[0]), Integer.parseInt(second[1]));
     }
 
     private static Stream<String> readInput(String path) throws IOException {
