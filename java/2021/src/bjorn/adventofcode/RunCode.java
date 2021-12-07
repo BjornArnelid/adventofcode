@@ -7,6 +7,7 @@ import bjorn.adventofcode.day4.Bingo;
 import bjorn.adventofcode.day5.Line;
 import bjorn.adventofcode.day5.Navigator;
 import bjorn.adventofcode.day6.FishSimulator;
+import bjorn.adventofcode.day7.CrabSubmarine;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,6 +40,8 @@ public class RunCode {
                     day5();
                 } else if (day.equals("6")) {
                     day6();
+                } else if (day.equals("7")) {
+                    day7();
                 } else {
                     System.out.println("You selected day " + day);
                 }
@@ -159,7 +162,7 @@ public class RunCode {
     }
 
     private static void day6() throws IOException {
-        System.out.println("Starting day 5 part one...");
+        System.out.println("Starting day 6 part one...");
 
         List<Integer> initialFishes = Arrays.stream(readInput("data/day6.data")
                 .findFirst().get().split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
@@ -174,6 +177,15 @@ public class RunCode {
         String result = myformatter.format(simulator.getNumberOfFishes());
         System.out.println("Answer part two: " + result);
 
+    }
+
+    private static void day7() throws IOException {
+        System.out.println("Starting day 7 part one...");
+        List<Integer> crabPositions = Arrays.stream(readInput("data/day7.data")
+                .findFirst().get().split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+        System.out.println("Answer part one: " + CrabSubmarine.calculateOptimalFuel(crabPositions, false));
+
+        System.out.println("Answer part two: " + CrabSubmarine.calculateOptimalFuel(crabPositions, true));
     }
 
     private static Stream<String> readInput(String path) throws IOException {
