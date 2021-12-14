@@ -1,6 +1,8 @@
 package bjorn.adventofcode;
 
 import bjorn.adventofcode.day1.Sonar;
+import bjorn.adventofcode.day13.Dot;
+import bjorn.adventofcode.day13.Manual;
 import bjorn.adventofcode.day2.Submarine;
 import bjorn.adventofcode.day3.Diagnostics;
 import bjorn.adventofcode.day4.Bingo;
@@ -8,6 +10,7 @@ import bjorn.adventofcode.day5.Line;
 import bjorn.adventofcode.day5.Navigator;
 import bjorn.adventofcode.day6.FishSimulator;
 import bjorn.adventofcode.day7.CrabSubmarine;
+import bjorn.adventofcode.day8.Display;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +22,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -42,8 +46,12 @@ public class RunCode {
                     day6();
                 } else if (day.equals("7")) {
                     day7();
+                } else if (day.equals("8")) {
+                    day8();
+                } else if (day.equals("13")) {
+                    day13();
                 } else {
-                    System.out.println("You selected day " + day);
+                    System.out.println("Day " + day + " not implemented yet!");
                 }
             } catch (IOException e) {
                 System.out.println("Error reading file!");
@@ -186,6 +194,67 @@ public class RunCode {
         System.out.println("Answer part one: " + CrabSubmarine.calculateOptimalFuel(crabPositions, false));
 
         System.out.println("Answer part two: " + CrabSubmarine.calculateOptimalFuel(crabPositions, true));
+    }
+
+    private static void day8() throws IOException {
+        System.out.println("Starting day 8 part one...");
+        int amount = 0;
+        List<String> rows = readInput("data/day8.data").toList();
+        for(String row : rows) {
+            Display display = new Display();
+            String[] signalParts = row.split(Pattern.quote(" | "));
+            display.setPattern(Arrays.stream(signalParts[0].split(" ")));
+            amount += display.countNumbers(Arrays.stream(signalParts[1].split(" ")));
+        }
+        System.out.println("Answer part one: " + amount);
+    }
+
+    private static void day13() throws IOException {
+        System.out.println("Starting day 13 part one...");
+        Manual manual = new Manual();
+        List<String> rows = readInput("data/day13.data").toList();
+        List<String> dotInput = getDotPart(rows);
+        List<String> folds = getFolds(rows, dotInput);
+        dotInput.stream().forEach(s -> manual.addDot(new Dot(s)));
+        String firstFold = folds.get(0);
+        if(firstFold.startsWith("y")) {
+            manual.foldY(Integer.parseInt(firstFold.substring(2)));
+        } else {
+            manual.foldX(Integer.parseInt(firstFold.substring(2)));
+        }
+
+        String folded = manual.paintDots();
+        long count = folded.chars().filter(ch -> ch == '#').count();
+        System.out.println("Answer part one: " + count);
+
+        System.out.println("Starting part two...");
+        for(String fold : folds.subList(1, folds.size())) {
+            if(fold.startsWith("y")) {
+                manual.foldY(Integer.parseInt(fold.substring(2)));
+            } else {
+                manual.foldX(Integer.parseInt(fold.substring(2)));
+            }
+        }
+        System.out.println("Answer part two:\n" + manual.paintDots());
+    }
+
+    private static List<String> getDotPart(List<String> rows) {
+        ArrayList<String> dots = new ArrayList<>();
+        for (String row : rows) {
+            if (row.isBlank()) {
+                return dots;
+            }
+            dots.add(row);
+        }
+        return null;
+    }
+
+    private static List<String> getFolds(List<String> rows, List<String> dotInput) {
+        ArrayList<String> folds = new ArrayList<>();
+        for(String row : rows.subList(dotInput.size() + 1, rows.size())) {
+            folds.add(row.substring(11));
+        }
+        return folds;
     }
 
     private static Stream<String> readInput(String path) throws IOException {
