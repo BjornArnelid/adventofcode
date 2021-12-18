@@ -3,6 +3,7 @@ package bjorn.adventofcode;
 import bjorn.adventofcode.day1.Sonar;
 import bjorn.adventofcode.day13.Dot;
 import bjorn.adventofcode.day13.Manual;
+import bjorn.adventofcode.day15.RiskMap;
 import bjorn.adventofcode.day2.Submarine;
 import bjorn.adventofcode.day3.Diagnostics;
 import bjorn.adventofcode.day4.Bingo;
@@ -50,6 +51,8 @@ public class RunCode {
                     day8();
                 } else if (day.equals("13")) {
                     day13();
+                } else if (day.equals("15")) {
+                    day15();
                 } else {
                     System.out.println("Day " + day + " not implemented yet!");
                 }
@@ -236,6 +239,14 @@ public class RunCode {
             }
         }
         System.out.println("Answer part two:\n" + manual.paintDots());
+    }
+
+    private static void day15() throws IOException {
+        System.out.println("Starting day 15 part one...");
+        List<String> rows = readInput("data/day15.data").toList();
+        RiskMap map = new RiskMap(rows.toArray(new String[0]));
+        System.out.println("Answer part one: " + map.calculateRisk());
+
     }
 
     private static List<String> getDotPart(List<String> rows) {
