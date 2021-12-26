@@ -4,6 +4,7 @@ import bjorn.adventofcode.day1.Sonar;
 import bjorn.adventofcode.day13.Dot;
 import bjorn.adventofcode.day13.Manual;
 import bjorn.adventofcode.day15.RiskMap;
+import bjorn.adventofcode.day18.SnailFishCalculator;
 import bjorn.adventofcode.day2.Submarine;
 import bjorn.adventofcode.day3.Diagnostics;
 import bjorn.adventofcode.day4.Bingo;
@@ -53,6 +54,8 @@ public class RunCode {
                     day13();
                 } else if (day.equals("15")) {
                     day15();
+                } else if (day.equals("18")) {
+                    day18();
                 } else {
                     System.out.println("Day " + day + " not implemented yet!");
                 }
@@ -247,6 +250,14 @@ public class RunCode {
         RiskMap map = new RiskMap(rows.toArray(new String[0]));
         System.out.println("Answer part one: " + map.calculateRisk());
 
+    }
+
+
+    private static void day18() throws IOException {
+        System.out.println("Starting day 18 part one...");
+        SnailFishCalculator calculator = new SnailFishCalculator();
+        readInput("data/day18.data").forEach(calculator::add);
+        System.out.println("Answer part one: " + calculator.getResult().getMagnitude());
     }
 
     private static List<String> getDotPart(List<String> rows) {

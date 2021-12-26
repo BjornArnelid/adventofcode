@@ -1,6 +1,5 @@
 import bjorn.adventofcode.day5.Line;
 import bjorn.adventofcode.day5.Navigator;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
