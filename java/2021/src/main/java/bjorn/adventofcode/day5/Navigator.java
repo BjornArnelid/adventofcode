@@ -6,15 +6,22 @@ import java.util.List;
 public class Navigator {
     private final List<Line> vents = new ArrayList<>();
     private final ArrayList<Position> overlapList = new ArrayList<>();
+    private boolean useDiagonal;
+
+    public Navigator(boolean useDiagonal) {
+    this.useDiagonal = useDiagonal;
+    }
 
     public void addLine(Line line) {
+        if (line.isDiagonal() && !useDiagonal) {
+            return;
+        }
         for(Line otherLine : vents) {
-            if(!otherLine.isVertical()){
-                if(line.horizontalMatch(otherLine) || line.verticalMatch(otherLine)) {
+            if(!otherLine.isDiagonal() || this.useDiagonal){
+                if(line.isInBounds(otherLine)) {
                     for(Position overlap : line.calculateOverlap(otherLine)) {
                         addOverlaps(overlap);
                     }
-
                 }
             }
         }

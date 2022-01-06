@@ -162,10 +162,15 @@ public class RunCode {
 
     private static void day5() throws IOException {
         System.out.println("Starting day 5 part one...");
-        Navigator navigator = new Navigator();
-        readInput("data/day5.data").forEach(s -> navigator.addLine(createLine(s)));
+        Navigator firstNavigator = new Navigator(false);
+        readInput("data/day5.data").forEach(s -> firstNavigator.addLine(createLine(s)));
 
-        System.out.println("Answer part one: " + navigator.getNumberOfOverlapa());
+        System.out.println("Answer part one: " + firstNavigator.getNumberOfOverlapa());
+
+        System.out.println("Starting part two...");
+        Navigator secondNavigator = new Navigator(true);
+        readInput("data/day5.data").forEach(s -> secondNavigator.addLine(createLine(s)));
+        System.out.println("Answer part two: " + secondNavigator.getNumberOfOverlapa());
     }
 
     private static Line createLine(String input) {
