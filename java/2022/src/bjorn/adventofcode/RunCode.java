@@ -12,9 +12,9 @@ import java.util.stream.Stream;
 import bjorn.adventofcode.day1.CaloriesCounter;
 
 public class RunCode {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length > 0) {
-            String day = args[0];
+            final String day = args[0];
             try {
                 if (day.equals("1")) {
                     day1();
@@ -32,8 +32,8 @@ public class RunCode {
 
     private static void day1() throws IOException {
         System.out.println("Starting part one...");
-        List<List<Long>> elfs = new ArrayList<>();
-        List<String> input = readInput("data/day1.data").toList();
+        final List<List<Long>> elfs = new ArrayList<>();
+        final List<String> input = readInput("data/day1.data").toList();
         List<Long> elfList = new ArrayList<Long>();
         for (String value : input) {
         	if(!value.isBlank()) {
@@ -45,7 +45,6 @@ public class RunCode {
         }
         
 		elfs.add(elfList);
-		elfList = new ArrayList<>();
 		
         System.out.println("Answer part 1: " + CaloriesCounter.countMax(elfs));
         
@@ -54,9 +53,9 @@ public class RunCode {
         System.out.println("Answer part 2: " + CaloriesCounter.countTopThree(elfs));
     }
     
-    private static Stream<String> readInput(String path) throws IOException {
-        Path p = Paths.get(path);
-        BufferedReader reader = Files.newBufferedReader(p);
+    private static Stream<String> readInput(final String path) throws IOException {
+        final Path p = Paths.get(path);
+        final BufferedReader reader = Files.newBufferedReader(p);
         return reader.lines();
     }
 }
