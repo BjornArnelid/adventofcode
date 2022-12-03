@@ -1,4 +1,4 @@
-package bjorn.adventofcode.day2;
+package bjorn.adventofcode;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,7 +6,10 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
-class StrategyGuideTest {
+import bjorn.adventofcode.day2.Game;
+import bjorn.adventofcode.day2.Sign;
+
+class Day2Test {
 
 	@Test
 	void testParseString() {
