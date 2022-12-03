@@ -83,6 +83,6 @@ class Day2Test {
 	void testTranslatedGame() {
 		Game game = new Game();
 		Stream.of("A Y", "B X", "C Z").forEach(game::playTranslatedRound);
-		assertEquals(15, game.getScore());
+		assertEquals(12, game.getScore());
 	}
 }
