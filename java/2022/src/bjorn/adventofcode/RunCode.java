@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import bjorn.adventofcode.day1.CaloriesCounter;
 import bjorn.adventofcode.day2.Game;
+import bjorn.adventofcode.day3.RuckSackPlanner;
 
 public class RunCode {
 	public static void main(final String[] args) {
@@ -21,6 +22,8 @@ public class RunCode {
 					day1();
 				} else if (day.equals("2")) {
 					day2();
+				} else if (day.equals("3")) {
+					day3();
 				} else {
 					System.out.println("Day " + day + " not implemented yet!");
 				}
@@ -69,6 +72,17 @@ public class RunCode {
 		readInput("data/day2.data").forEach(game::playTranslatedRound);
 
 		System.out.println("Answer part 2: " + game.getScore());
+	}
+
+	private static void day3() throws IOException {
+		System.out.println("Starting part one...");
+		List<String> rucksacks = readInput("data/day3.data").toList();
+
+		System.out.println("Answer part 1: " + RuckSackPlanner.evaluate(rucksacks));
+		
+		System.out.println("Starting part two...");
+
+		System.out.println("Answer part 2: " + RuckSackPlanner.countAllBadges(rucksacks));
 	}
 
 	private static Stream<String> readInput(final String path) throws IOException {
