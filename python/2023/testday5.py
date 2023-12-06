@@ -1,6 +1,6 @@
 import unittest
 
-from day5 import SeedConverter, parse_seeds
+from day5 import SeedConverter, find_min
 
 
 class MyTestCase(unittest.TestCase):
@@ -40,34 +40,37 @@ class MyTestCase(unittest.TestCase):
          '56 93 4'])
 
     def test_seed_to_soil_1(self):
-        self.assertEqual(81, self.converter.convert_seed_to_soil(79))
+        self.assertEqual([(81, 1)], self.converter.convert_seed_to_soil([(79, 1)]))
 
     def test_seed_to_soil_2(self):
-        self.assertEqual(14, self.converter.convert_seed_to_soil(14))
+        self.assertEqual([(14, 1)], self.converter.convert_seed_to_soil([(14, 1)]))
 
     def test_seed_to_soil_3(self):
-        self.assertEqual(57, self.converter.convert_seed_to_soil(55))
+        self.assertEqual([(57, 1)], self.converter.convert_seed_to_soil([(55, 1)]))
 
     def test_seed_to_soil_4(self):
-        self.assertEqual(13, self.converter.convert_seed_to_soil(13))
+        self.assertEqual([(13, 1)], self.converter.convert_seed_to_soil([(13, 1)]))
 
     def test_water_to_light(self):
-        self.assertEqual(74, self.converter.convert_water_to_light(81))
+        self.assertEqual([(74, 1)], self.converter.convert_water_to_light([(81, 1)]))
 
     def test_seed_to_location_1(self):
-        self.assertEqual(82, self.converter.convert_seed_to_location(79))
+        self.assertEqual([(82, 1)], self.converter.convert_seed_to_location([(79, 1)]))
 
     def test_water_to_fertilizer(self):
-        self.assertEqual(49, self.converter.convert_fertilizer_to_water(53))
+        self.assertEqual([(49, 1)], self.converter.convert_fertilizer_to_water([(53, 1)]))
 
     def test_seed_to_location_2(self):
-        self.assertEqual(43, self.converter.convert_seed_to_location(14))
+        self.assertEqual([(43, 1)], self.converter.convert_seed_to_location([(14, 1)]))
 
     def test_seed_to_location_3(self):
-        self.assertEqual(86, self.converter.convert_seed_to_location(55))
+        self.assertEqual([(86, 1)], self.converter.convert_seed_to_location([(55, 1)]))
 
     def test_seed_to_location_4(self):
-        self.assertEqual(35, self.converter.convert_seed_to_location(13))
+        self.assertEqual([(35, 1)], self.converter.convert_seed_to_location([(13, 1)]))
+
+    def test_min_seed_in_range(self):
+        self.assertEqual(46, find_min(self.converter.convert_seed_to_location([(79, 14), (55, 13)])))
 
 
 if __name__ == '__main__':
