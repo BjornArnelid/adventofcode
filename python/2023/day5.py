@@ -5,26 +5,38 @@ class ConverterMapping:
     def convert(self, number):
         mapped = ()
         unmapped = []
+        to_be_mapped = number[1]
         diff = abs(number[0] - self.source)
         if number[0] < self.source:
+            # Number is entirely unmapped
             if diff >= number[1]:
                 return (), [number]
+            # There is overlapping
             else:
+                # Deal with part before mapping
                 unmapped.append((number[0], diff))
-                if number[1] > self.size + diff:
-                    unmapped.append((number[0] + diff + self.size, number[1] - diff - self.size))
+                to_be_mapped -= diff
+                # Rest does not fit into mapping
+                if to_be_mapped > self.size:
+                    unmapped.append((number[0] + diff + self.size, to_be_mapped - self.size))
                     return (self.destination, self.size), unmapped
+                # Rest fits into mapping
                 else:
-                    return (self.destination,number[1] - diff), unmapped
+                    return (self.destination, to_be_mapped), unmapped
+
         else:
+            # Number is entirely unmapped
             if diff > self.size:
                 return (), [number]
+            # There is overlapping
             else:
-                if number[1] + diff <= self.size:
-                    return (self.destination + diff, number[1]), []
-                else:
+                # Does not fit in mapping
+                if to_be_mapped + diff > self.size:
+                    to_be_mapped = self.size - diff
                     return ((self.destination + diff, self.size - diff),
-                            [(number[0] + self.size - diff, number[1] - self.size - diff)])
+                            [(number[0] + self.size - diff, number[1] - to_be_mapped)])
+                else:
+                    return (self.destination + diff, number[1]), []
 
 
 class SeedConverter:
@@ -136,12 +148,19 @@ class SeedConverter:
         return self.apply_mapping(humidities, self.humidity_to_location_mappings)
 
     def convert_seed_to_location(self, seed):
+        seed.sort()
         soil = self.convert_seed_to_soil(seed)
+        soil.sort()
         fertilizer = self.convert_soil_to_fertilizer(soil)
+        fertilizer.sort()
         water = self.convert_fertilizer_to_water(fertilizer)
+        water.sort()
         light = self.convert_water_to_light(water)
+        light.sort()
         temperature = self.convert_light_to_temperature(light)
+        temperature.sort()
         humidity = self.convert_temperature_to_humidity(temperature)
+        humidity.sort()
         return self.convert_humidity_to_location(humidity)
 
 
@@ -168,16 +187,16 @@ if __name__ == '__main__':
     print("Starting day 5")
     with open('data/day5.data') as data:
         data_list = list(data)
-    locations = []
+    # locations = []
     converter = SeedConverter(data_list)
-    for seed_string in data_list[0].replace('seeds: ', '').split(' '):
-        locations.append(converter.convert_seed_to_location([(int(seed_string), 1)]))
-
-    locations.sort()
-    print("Answer part 1: " + str(locations[0]))
+    # for seed_string in data_list[0].replace('seeds: ', '').split(' '):
+    #     locations.append(converter.convert_seed_to_location([(int(seed_string), 1)]))
+    #
+    # locations.sort()
+    # print("Answer part 1: " + str(locations[0]))
 
     seed_list = parse_seeds(data_list[0])
     locations = converter.convert_seed_to_location(seed_list)
 
     locations.sort()
-    print("Answer part 2: " + str(find_min(locations)))
+    print("Answer part 2: " + str(locations))
